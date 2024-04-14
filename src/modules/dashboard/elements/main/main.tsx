@@ -1,8 +1,6 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 
-// import DashboardOverViewCard from "@/shared/components/cards/overview.card";
-// import SubscribersChart from "@/shared/components/charts/subscribers.chart";
 import { Button } from "@nextui-org/react";
 import { ICONS } from "@/shared/utils/icons";
 import { useState } from "react";
@@ -21,15 +19,12 @@ const Main = () => {
       const textToCopy = smallText.innerText;
       navigator.clipboard.writeText(textToCopy).then(() => {
         setCopied(true);
-        // toast.success("Copied");
         setTimeout(() => {
           setCopied(false);
-        }, 2000);
+        }, 1000);
       });
     }
   };
-
-  
 
   return (
     <div className="p-5 w-full h-screen bg-[#f9fafb]">
@@ -68,16 +63,20 @@ const Main = () => {
                   onClick={handleCopyClick}
                 >
                   <small
-                    className={`w-[70%] text-sm overflow-hidden overflow-ellipsis whitespace-nowrap copy-text ${
-                      copied ? "bg-blue-200" : "bg-transparent"
-                    }`}
+                    className={`w-[70%] text-sm overflow-hidden overflow-ellipsis whitespace-nowrap copy-text `}
                   >
                     {process.env.NEXT_PUBLIC_WEBSITE_URL}/subscribe?username=
                     {user?.username}
                   </small>
-                  <div className="absolute h-[38px] w-[90px] rounded-r-lg bg-[#DFE7FF] right-0 flex items-center justify-center">
+                  <div
+                    className={`absolute h-[38px] w-[90px] rounded-r-lg  ${
+                      !copied ? "bg-[#DFE7FF]" : "bg-slate-300"
+                    } right-0 flex items-center justify-center`}
+                  >
                     <span className="text-lg">{ICONS.copy}</span>
-                    <span className="pl-1">{copied ? "copied" : "copy"}</span>
+                    <span className={`pl-1 `}>
+                      {copied ? "copied" : "copy"}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -88,8 +87,8 @@ const Main = () => {
           <div className="w-full bg-white border rounded p-5 my-3">
             <h5 className="font-medium">Tutorials</h5>
             <p className="text-sm opacity-[.7]">
-              Learn how to get started on NextMailer and utilize all our features,
-              directly from the becodemy team.
+              Learn how to get started on NextMailer and utilize all our
+              features, directly from the becodemy team.
             </p>
             <br />
             <Button className="bg-[#FBCFE8] text-[#831743] rounded-lg h-[35px] flex items-center">

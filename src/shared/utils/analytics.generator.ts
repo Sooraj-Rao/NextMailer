@@ -1,3 +1,4 @@
+import Subscriber from "@/models/subscriber.model";
 import { Document, Model } from "mongoose";
 
 interface MonthData {
@@ -6,7 +7,6 @@ interface MonthData {
 }
 
 export async function generateAnalyticsData<T extends Document>(
-  model: Model<T>
 ): Promise<{ last7Months: MonthData[] }> {
   const last7Months: MonthData[] = [];
   const currentDate = new Date();
@@ -31,7 +31,7 @@ export async function generateAnalyticsData<T extends Document>(
       year: "numeric",
     });
 
-    const count = await model.countDocuments({
+    const count = await Subscriber.countDocuments({
       createdAt: {
         $gte: startDate,
         $lt: endDate,

@@ -24,7 +24,7 @@ const Page = () => {
           className="opacity-[.7] w-min flex text-xl items-center"
         >
           <span>{ICONS.backArrow}</span>
-          <span>Exit</span>
+          <span>Back</span>
         </Link>
         {/* email editor */}
         <div className="my-5">
